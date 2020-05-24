@@ -1,0 +1,15 @@
+sudo gitlab-runner register \
+  --non-interactive \
+  --url "http://centos.cdecl.net/" \
+  --registration-token "poN8aiTmwn3XA7j3RzZF" \
+  --executor "docker" \
+  --docker-image alpine \
+  --description "docker-runner" \
+  --tag-list "docker" \
+  --env "DOCKER_TLS_CERTDIR=" \
+  --docker-privileged=true \
+  --docker-volumes "/ansible:/ansible" \
+  --docker-extra-hosts "centos.cdecl.net:192.168.0.20"
+
+
+
