@@ -1,0 +1,18 @@
+
+- hosts: servers
+  tasks:
+    - name: conf
+      raw: |
+        echo "" > osconfig.txt
+        echo "[[cpiinfo]]" >> osconfig.txt
+        cat /proc/cpuinfo >> osconfig.txt
+        echo "[[version]]" >> osconfig.txt
+        cat /proc/version >> osconfig.txt
+        echo "[[release]]" >> osconfig.txt
+        cat /etc/*-release >> osconfig.txt
+
+    - name: fetch config
+      fetch:
+        src: osconfig.txt
+        dest: osconfig-{{ inventory_hostname }}.txt
+        flat: yes
