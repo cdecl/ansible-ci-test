@@ -1,0 +1,18 @@
+stages:                   # statge 정의 
+  - build
+  - test
+  - deploy
+
+build_stage:
+  image: cdecl/ansible
+  stage: build
+  only:
+    changes:
+      - ansible.gitlab-ci.yml
+  script:
+    - git version
+    - ansible-playbook -i /ansible/hosts sys.yml
+    - ls -l
+  tags:
+    - docker
+    
